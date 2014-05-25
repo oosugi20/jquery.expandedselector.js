@@ -21,20 +21,22 @@ Module = function (element, options) {
 	 * init
 	 */
 	fn.init = function () {
-		this._prepareElms();
-		this._eventify();
-	};
+		this.$option = this.$el.find('option');
 
-	/**
-	 * _prepareElms
-	 */
-	fn._prepareElms = function () {
-	};
+		var html = '<ul class="js-expandedselector">';
+		this.$option.each(function () {
+			var $this = $(this);
+			var value = $this.attr('value');
+			var text = $this.text();
+			if (value) {
+				html += '<li class="js-expandedselector-item"><a href="' + value + '">' + text + '</a></li>';
 
-	/**
-	 * _eventify
-	 */
-	fn._eventify = function () {
+			}
+		});
+		html += '</ul>';
+
+		$(html).insertAfter(this.$el);
+		this.$el.remove();
 	};
 
 })(Module.prototype);
